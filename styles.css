@@ -1,0 +1,36 @@
+body{
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+#container {
+    max-width: 320px; /* Limit its size for a calculator look */
+    width: 90vw;      /* Make it responsive */
+    background-color: #eee;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    overflow: hidden; /* Important for rounded corners on inner elements */
+    margin: 20px auto; /* Center on the page */
+}       
+
+.frame{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.button-row{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.calc-button{
+    flex:1;
+}
