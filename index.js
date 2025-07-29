@@ -129,31 +129,6 @@ function handleLastDelete(){
     display.textContent=currentDisplayValue;
 }
 
-// function calculate(num1, operator, num2) {
-//     let result;
-//     switch (operator) {
-//         case '+':
-//             result=(add(num1,num2));
-//             break;
-//         case '-':
-//             result=(subtract(num1,num2));
-//             break;
-//         case '*':
-//             result=(multiply(num1,num2));
-//             break;
-//         case '/':
-//             if (num2 === 0) {
-//                 return "Error: Division by zero";
-//             }
-//             result=(divide(num1,num2));
-//             break;
-//         default:
-//             alert("Error: Invalid operator");
-//             return;
-//     }
-//     alert(result);
-// }
-
 const container=document.querySelector("#container");
 const calculatorBody=document.createElement("div");
 calculatorBody.id="calculator-body";
