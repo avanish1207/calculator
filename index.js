@@ -38,6 +38,20 @@ function handleNumberInput(numString){
     display.textContent=currentDisplayValue;
 }
 
+function handleOperatorInput(nextOperator){
+    const inputValue=parseFloat(currentDisplayValue);
+    if(operator!==null && waitingForSecondOperand===true){
+        operator=nextOperator;
+        return;
+    }
+    if(firstOperand===null) firstOperand=inputValue;
+    else if(operator!==null){
+        performCalculation();
+    }
+    waitingForSecondOperand=true;
+    operator=nextOperator;
+}
+
 // function calculate(num1, operator, num2) {
 //     let result;
 //     switch (operator) {
