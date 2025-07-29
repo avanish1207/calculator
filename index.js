@@ -141,11 +141,11 @@ const content=document.createElement("div");
 content.classList.add("frame");
 calculatorBody.append(content);
 const buttonLayout = [
-    ['C', '/', '*', '-'],   // Row 1
-    ['7', '8', '9', '+'],   // Row 2
-    ['4', '5', '6', 'del'], // Row 3
-    ['1', '2', '3', '='],   // Row 4
-    ['0', '.', '%', 'AC']   // Row 5
+    ['AC', 'C', 'del', '/'],   // Row 1
+    ['7', '8', '9', '*'],   // Row 2
+    ['4', '5', '6', '-'], // Row 3
+    ['1', '2', '3', '+'],   // Row 4
+    ['.', '0', '%', '=']   // Row 5
 ];
 
 function getCssSafeButtonName(buttonText) {
@@ -191,6 +191,15 @@ buttonLayout.forEach(rowData => {
                 handleLastDelete(); // Call the delete handler
             }
         });
+        button.style.color='white';
+        button.style.fontSize='x-large';
+        if(!isNaN(parseFloat(buttonText))){
+            button.style.backgroundColor="#333333";
+        } else if (['/', '*', '-', '+', '='].includes(buttonText)){
+            button.style.backgroundColor='#FF9500';
+        } else{
+            button.style.backgroundColor="#A6A6A6";
+        }
         rowDiv.append(button);
     });
 });
