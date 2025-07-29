@@ -101,6 +101,34 @@ function performCalculation(){
     display.textContent=currentDisplayValue;
 }
 
+function handleEqualsInput(){
+    performCalculation();
+    operator = null;
+    waitingForSecondOperand = true; //optional, I just threw it in there just in case 
+}
+
+function handleClearAll(){
+    currentDisplayValue = '0';
+    firstOperand = null;
+    operator = null;
+    waitingForSecondOperand = false;
+    display.textContent=currentDisplayValue;
+}
+
+function handleLastDelete(){
+    if(currentDisplayValue==='Error: div by 0' || currentDisplayValue==="Error: Invalid Op." || waitingForSecondOperand===true){
+        handleClearAll();
+        return;
+    }
+    else if(currentDisplayValue.length>1){
+        currentDisplayValue=currentDisplayValue.slice(0,-1);
+    }
+    else{
+        currentDisplayValue='0';
+    }
+    display.textContent=currentDisplayValue;
+}
+
 // function calculate(num1, operator, num2) {
 //     let result;
 //     switch (operator) {
