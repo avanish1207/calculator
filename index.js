@@ -198,6 +198,24 @@ buttonLayout.forEach(rowData => {
         button.classList.add("calc-button");
         const uniqueButton=getCssSafeButtonName(buttonText);
         button.classList.add(`button-${uniqueButton}`);
+        button.addEventListener('click', () => {
+            if (!isNaN(parseFloat(buttonText)) || buttonText === '.') {
+                // It's a number (0-9) or the decimal point
+                handleNumberInput(buttonText);
+            } else if (['/', '*', '-', '+', '%'].includes(buttonText)) {
+                // It's an operator
+                handleOperatorInput(buttonText);
+            } else if (buttonText === '=') {
+                // It's the equals button
+                handleEqualsInput(); // Call the equals handler
+            } else if (buttonText === 'C' || buttonText === 'AC') {
+                // It's a clear (all clear) button
+                handleClearAll(); // Call the clear handler
+            } else if (buttonText === 'del') {
+                // It's the delete last digit button
+                handleLastDelete(); // Call the delete handler
+            }
+        });
         rowDiv.append(button);
     });
 });
