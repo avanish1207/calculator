@@ -14,30 +14,54 @@ function divide(a,b){
     return a/b;
 }
 
-function calculate(num1, operator, num2) {
-    let result;
-    switch (operator) {
-        case '+':
-            result=(add(num1,num2));
-            break;
-        case '-':
-            result=(subtract(num1,num2));
-            break;
-        case '*':
-            result=(multiply(num1,num2));
-            break;
-        case '/':
-            if (num2 === 0) {
-                return "Error: Division by zero";
-            }
-            result=(divide(num1,num2));
-            break;
-        default:
-            alert("Error: Invalid operator");
-            return;
+let firstOperand=null;
+let operator=null;
+let currentDisplayValue='0';
+let waitingForSecondOperand = false; 
+
+function handleNumberInput(numString){
+    if(waitingForSecondOperand===true){
+        currentDisplayValue=numString;
+        waitingForSecondOperand=false;
     }
-    alert(result);
+    else{
+        if(currentDisplayValue==='0' && numString !=='.'){
+            currentDisplayValue=numString;
+        }
+        else if(numString==='.' && currentDisplayValue.includes('.')){
+            return;
+        }
+        else{
+            currentDisplayValue+=numString;
+        }
+    }
+    display.textContent=currentDisplayValue;
 }
+
+// function calculate(num1, operator, num2) {
+//     let result;
+//     switch (operator) {
+//         case '+':
+//             result=(add(num1,num2));
+//             break;
+//         case '-':
+//             result=(subtract(num1,num2));
+//             break;
+//         case '*':
+//             result=(multiply(num1,num2));
+//             break;
+//         case '/':
+//             if (num2 === 0) {
+//                 return "Error: Division by zero";
+//             }
+//             result=(divide(num1,num2));
+//             break;
+//         default:
+//             alert("Error: Invalid operator");
+//             return;
+//     }
+//     alert(result);
+// }
 
 const container=document.querySelector("#container");
 const calculatorBody=document.createElement("div");
@@ -45,7 +69,7 @@ calculatorBody.id="calculator-body";
 container.append(calculatorBody);
 const display=document.createElement("div");
 display.id="display";
-display.textContent = "0";
+display.textContent = currentDisplayValue;
 calculatorBody.append(display); 
 const content=document.createElement("div");
 content.classList.add("frame");
@@ -58,6 +82,21 @@ const buttonLayout = [
     ['0', '.', '%', 'AC']   // Row 5
 ];
 
+function getCssSafeButtonName(buttonText) {
+    switch (buttonText) {
+        case '/': return 'divide';
+        case '*': return 'multiply';
+        case '+': return 'plus';
+        case '-': return 'minus'; // For the operator minus
+        case '=': return 'equals';
+        case '.': return 'decimal';
+        case '%': return 'percent';
+        case 'AC': return 'all-clear';
+        case 'del': return 'delete';
+        default: return buttonText.toLowerCase();
+    }
+}
+
 buttonLayout.forEach(rowData => {
     const rowDiv=document.createElement("div");
     rowDiv.classList.add("button-row");
@@ -66,6 +105,8 @@ buttonLayout.forEach(rowData => {
         const button=document.createElement("button");
         button.textContent=buttonText;
         button.classList.add("calc-button");
+        const uniqueButton=getCssSafeButtonName(buttonText);
+        button.classList.add(`button-${uniqueButton}`);
         rowDiv.append(button);
     });
 });
