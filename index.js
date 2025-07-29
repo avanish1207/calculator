@@ -40,9 +40,16 @@ function calculate(num1, operator, num2) {
 }
 
 const container=document.querySelector("#container");
+const calculatorBody=document.createElement("div");
+calculatorBody.id="calculator-body";
+container.append(calculatorBody);
+const display=document.createElement("div");
+display.id="display";
+display.textContent = "0";
+calculatorBody.append(display); 
 const content=document.createElement("div");
 content.classList.add("frame");
-container.append(content);
+calculatorBody.append(content);
 const buttonLayout = [
     ['C', '/', '*', '-'],   // Row 1
     ['7', '8', '9', '+'],   // Row 2

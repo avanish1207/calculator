@@ -34,3 +34,19 @@ body{
 .calc-button{
     flex:1;
 }
+
+#calculator-body {
+    display: flex;
+    flex-direction: column; /* Stack display and buttons-frame vertically */
+    padding: 10px; /* Internal padding for the whole calculator content */
+    gap: 10px; /* Space between display and button grid */
+}
+
+#display{
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+    word-break: break-all;
+    border: 1px solid black;
+}
