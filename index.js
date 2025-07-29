@@ -52,6 +52,55 @@ function handleOperatorInput(nextOperator){
     operator=nextOperator;
 }
 
+function roundResult(num){
+    return Math.round(num * 10000000) / 10000000;
+}
+
+function performCalculation(){
+    let result;
+    if(firstOperand===null || operator===null) return;
+    const secondOperand=parseFloat(currentDisplayValue);
+    if(isNaN(secondOperand)){
+        display.textContent="Error";
+        firstOperand = null; operator = null; currentDisplayValue = '0'; waitingForSecondOperand = false;
+        return;
+    }
+    switch(operator){
+        case '+':
+            result=add(firstOperand,secondOperand);
+            break;
+        case '-':
+            result=subtract(firstOperand,secondOperand);
+            break;
+        case '*':
+            result=multiply(firstOperand,secondOperand);
+            break;
+        case '/':
+            if(secondOperand===0){
+                display.textContent='Error: div by 0';
+                firstOperand = null; operator = null; currentDisplayValue = '0'; waitingForSecondOperand = false;
+                return;
+            }  
+            else {
+                divide(firstOperand,secondOperand);
+            }
+            break;
+        case '%':
+            result= firstOperand * (secondOperand / 100);
+            break;
+        default:
+            display.textContent="Error: Invalid Op.";
+            firstOperand = null; operator = null; currentDisplayValue = '0'; waitingForSecondOperand = false;
+            return;
+    }
+    result=roundResult(result);
+    currentDisplayValue = result.toString();
+    firstOperand = result;
+    operator = null;
+    waitingForSecondOperand = true;
+    display.textContent=currentDisplayValue;
+}
+
 // function calculate(num1, operator, num2) {
 //     let result;
 //     switch (operator) {
